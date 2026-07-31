@@ -1,0 +1,70 @@
+# Welcome to your project!
+# Start coding below
+
+# Get the user's name
+name = input("Enter your name: ")
+print(f"Hello, {name}!")
+
+print("\n--- Previous Academic Record ---")
+# Get old GPA details to calculate accumulated GPA
+old_gpa = float(input("Enter your cumulative GPA before this semester: "))
+old_credits = float(input("Enter the total credit hours earned before this semester: "))
+
+# Initialize GPA tracking variables with old data
+total_credits = old_credits
+total_honor_points = old_gpa * old_credits
+
+# Keep asking for courses until the user stops
+while True:
+    print("\n--- New Course Entry ---")
+ 
+    # Read course details
+    course_name = input("Enter the course name: ")
+    credits = float(input(f"How much credit hours is {course_name}? "))
+    letter_grade = input(f"What letter grade did you get in {course_name}? ")
+   
+    # Convert letter grade to grade points
+    grade = letter_grade.upper()
+    if grade == "A":
+        points = 4.0
+    elif grade == "A-":
+        points = 3.7
+    elif grade == "B+":
+        points = 3.3
+    elif grade == "B":
+        points = 3.0
+    elif grade == "B-":
+        points = 2.7
+    elif grade == "C+":
+        points = 2.3
+    elif grade == "C":
+        points = 2.0
+    elif grade == "D":
+        points = 1.0
+    else:
+        points = 0.0
+        
+    # Update totals for cumulative GPA calculation
+    class_honor_points = credits * points
+    total_credits += credits
+    total_honor_points += class_honor_points
+    print(f"✅ Saved! {course_name} added to your profile.")
+    
+    # Ask if the user wants to enter another class
+    another_class = input("Do you want to add another class? (yes/no): ")
+    if another_class.lower() == "no":
+        print("📥 Exiting entry mode. Calculating your cumulative GPA...")
+        break 
+
+# Compute and display final cumulative GPA report
+if total_credits > 0:
+    final_gpa = total_honor_points / total_credits
+    print("\n==============================")
+    print("🏆 YOUR CUMULATIVE ACADEMIC REPORT 🏆")
+    print("==============================")
+    print(f"Total Cumulative Credits: {total_credits:.1f}")
+    print(f"Total Honor Points:       {total_honor_points:.1f}")
+    print(f"👉 Accumulated Final GPA:  {final_gpa:.2f}") 
+    print("==============================")
+else:
+    print("\n⚠️ No academic history found.")
